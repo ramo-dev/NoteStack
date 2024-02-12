@@ -14,7 +14,7 @@ const CreateData = () => {
                     <textarea className='note' placeholder='Enter note...'></textarea>
                 <div className="actions">
                 <button className="delete">Delete note</button>
-                    <button className="add">Add note</button>
+                    <button className="add">Add note</button> 
                 </div>
             </div>
         </div>
