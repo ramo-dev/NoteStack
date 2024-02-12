@@ -13,10 +13,16 @@ export const menuItems = [
         icon : "fa-solid fa-circle-info"
     },
     {
+        title : "Notes",
+        url : "/notes",
+        cName : 'nav-links',
+        icon : "fa-solid fa-briefcase"
+    },
+    {
         title : "Create",
         url : "/create",
         cName : 'nav-links',
-        icon : "fa-solid fa-briefcase"
+        icon : "fa-solid fa-pen"
     }
     
     
