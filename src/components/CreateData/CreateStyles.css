@@ -1,0 +1,70 @@
+.container{    
+    display: flex;
+    border:2px solid grey;
+    padding: 1%;
+    min-height: 70vh;
+    margin: 20vh 2%;
+    border-radius: 10px;
+}
+
+.notesbar{
+    display: flex;
+    width:60vh;
+    border: 2px solid grey;
+    border-radius: 10px;
+    margin-right: 1%;
+}
+.note-create{
+    display: flex;
+    flex-direction: column;
+    border: 2px solid grey;
+    border-radius: 10px;
+    width: 100%;
+    padding:1%;
+}
+.title{
+    background-color: transparent;
+    border: 2px solid grey;
+    height:80px;
+    border-radius: inherit;
+    font-size: 20px;
+    padding: 1%;
+}
+.note{
+    background-color: transparent;
+    border: 2px solid grey;
+    height:80%;
+    border-radius: inherit;
+    margin: 1% 0 0 0;
+    font-size: 20px;
+    padding: 1%;
+}
+.actions{
+    display: flex;
+    justify-content: flex-end;
+    gap:10px;
+    margin-top: 1%;
+}
+.actions button{
+    padding:1%;
+    width:130px;
+    height:40px;
+    cursor: pointer;
+    text-align: center;
+}
+.delete{
+    padding-top: 0px;
+    background-color: rgb(105, 22, 22) ;
+    color:#fff;
+}
+.delete:hover{
+    background-color: rgb(209, 0, 0);
+}
+.add{
+    color:#000;
+    background-color: #c9c9c9
+}
+.add:hover{
+    color:#fff;
+    background-color: black;
+}

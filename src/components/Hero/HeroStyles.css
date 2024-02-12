@@ -1,0 +1,108 @@
+.hero{
+    display: flex;
+    width: 100%;
+    height:100vh;
+    position:relative;
+    flex-direction: row;
+    background-color:  rgb(0, 38, 70);
+}
+
+.reverse{
+    display: flex;
+    flex-direction: row-reverse;
+}
+.reverse img{
+    left:5%;
+    top:20%;
+}
+.reverse .hero-text{
+    flex-direction: column;
+    position: absolute;
+    left:78%;
+    top:35%;
+}
+img{
+    background-color: transparent;
+    width: 50%;
+    height:70%;
+    object-fit: cover;
+    right:5%;
+    top:20%;
+    position: absolute;
+}
+.hero-text{
+    flex-direction: column;
+    display: flex;
+    position:absolute;
+    left:25%;
+    top:34%;
+    transform: translate(-50%);
+    width:40%;
+}
+.hero-text h1{
+    font-size: 3rem;
+    font-weight: 800;
+    background:#fff;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.hero-text p{
+    font-size: 1.3rem;
+    color:#fff;
+    padding:0.5rem 0 2rem 0;
+}
+
+/* .hero-text .show{
+    text-decoration: none;
+    background:#fff;
+    padding:1rem 2rem;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color:#000;
+}
+.hero-text .hide{
+    display: none;
+} */
+@media  screen and (max-width:755px){
+    img{
+        top:40%;
+        width: 90%;
+        height:70%;
+        object-fit: cover;
+        opacity: 0.7;
+    }
+    .hero-text{
+        left:50%;
+        top:18%;
+        transform: translate(-50%);
+        width:100%;
+    }
+    .hero-text h1{
+    font-size: 2.3rem;
+        padding:10px 20px;
+    }
+    .hero-text p{
+        font-size: 1.1rem;
+        padding:0 1rem 0 1rem;
+    }
+    /* .hero-text .show{
+        padding:0.6rem 1.1rem;
+        border-radius: 6px;
+        font-size: 1rem;
+    } */
+    .reverse img{
+        top:50%;
+        width: 90%;
+        height:50%;
+        object-fit: cover;
+        opacity: 0.7;
+    }
+    .reverse .hero-text{
+        left:50%;
+        top:18%;
+        transform: translate(-50%);
+        width:100%;
+    }
+}
