@@ -1,16 +1,17 @@
 import './NoteStyles.css'
+import useFetch from '../Fetch/fetch'
 import React, { useState, useEffect } from "react";
-import { useHistory, useParams } from "react-router-dom";
+// import { useHistory, useParams } from "react-router-dom";
 // import { overlayStyles, popupStyles, contentStyles, activePopupStyles, loaderContainerStyle , loaderStyle } from './styles';
 
 const NoteDetails = () => {
 //   const notesUrl = 'http://192.168.100.12:5000/api/notes';
 //   const { id } = useParams();
 //   const history = useHistory();
-//   const [showModal, setShowModal] = useState(false); // State variable for modal visibility
 //   const [note, setNote] = useState(null); // State variable for note data
 
-  
+// const api = 'http://192.168.100.12:5000/api/blogs'
+// const { isPending, data: notes, error } = useFetch(api, { timeout: 5000 });
   
 //   useEffect(() => {
 
@@ -30,69 +31,45 @@ const NoteDetails = () => {
 //     fetchNote();
 //   }, [id, notesUrl]);
 
-//   const handleClick = () => {
-//     // Show modal confirmation dialog
-//     setShowModal(true);
-//   };
 
-function addToNoteSection(event) {
-  event.preventDefault();
 
-  const title = document.querySelector('.title').value;
-  const note = document.querySelector('.note').value;
-  const notesbar = document.querySelector('.notesbar');
 
-  if (!title || !note) {
-    alert("Please enter both title and note!");
-    return;
-  }
+  let notes = []
+  async function getData(url){
+      await fetch(url)
+      .then(response => response.json())
+      .then(data => {
+          notes = data.notes
+          notes.map((note)=>{ 
+          const notesbar = document.querySelector('.notesList');
+          let card = `
+          <div class="note-preview">
+          <div>
+              <h1>${note.title}</h1>
+              <p>${note.body}</p>
+          </div>
+          <div>
+              <button class="delete">Delete</button>
+          </div>
+        </div>
+          `
+          notesbar.innerHTML += card
+      
+      })})};
 
-  // Create the new card with the delete button
-  const newCard = `
-    <div class="note-preview">
-      <div>
-          <h1>${title}</h1>
-          <p>${note}</p>
-      </div>
-      <div>
-          <button class="delete">Delete</button>
-      </div>
-    </div>
-  `;
+  getData('http://127.0.0.1:5000/api/notes')
 
-  // Append the card to the notesbar
-  notesbar.innerHTML += newCard;
 
-  // Delegate event listener to handle clicks on dynamically added buttons
-  notesbar.addEventListener('click', (event) => {
-    const clickedDeleteButton = event.target.closest('.delete');
-    if (clickedDeleteButton) {
-      deleteNote(event);
-    }
-  });
-
-  // Clear the input fields after adding the note
-  document.querySelector('.title').value = "";
-  document.querySelector('.note').value = "";
-}
-
-function deleteNote(event) {
-  const notePreview = event.target.closest('.note-preview');
-
-  if (notePreview) {
-    notePreview.remove();
-  }
-}
 
 return (
   <div className="container">
-    <div className="notesbar">
+    <div className="notesList">
       <h1>Notes</h1>
     </div>
-    <form onSubmit={addToNoteSection}>
+    <form>
       <div className="note-card">
-    <input className="noteTitle" placeholder="Enter Title of note..."/>
-        <textarea className="noteText" placeholder="Enter note..." ></textarea>
+    <input className="noteTitle" placeholder="Your note"/>
+        <textarea className="noteText" ></textarea>
       </div>
       <div className="actions">
         <button type="submit" className="add">

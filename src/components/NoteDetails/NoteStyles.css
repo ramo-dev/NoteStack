@@ -11,16 +11,26 @@ html::-webkit-scrollbar{
 
 }
 
-.notesbar{
+.notesbarList{
     display: flex;
     flex-direction: column;
-    width:32%;
+    width:33%;
     border: 2px solid #1A4263;
     border-radius: 10px;
     margin-right: 1%;
     padding:1%;
-    overflow:hidden ;
+    overflow-y:scroll ;
+    overflow-x: hidden;
 }
+.notesbarList::-webkit-scrollbar{
+    width: 7px;
+    height: 5px;
+}
+.notesbarList::-webkit-scrollbar-thumb {
+    background-color:#1A4263;
+    border-radius: 10px;
+}
+
 .note-preview{
     border: 2px solid #1A4263;
     width:97%;
@@ -62,7 +72,8 @@ form{
     height:80px;
     font-size: 20px;
     padding: 1%;
-    border: none
+    border: none;
+
 }
 .noteText{
     background-color: transparent;

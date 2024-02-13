@@ -1,64 +1,67 @@
 import './CreateStyles.css'
 import React, { useState, useEffect } from "react";
-
+import useFetch from '../Fetch/fetch'
 const CreateData = () => {
-    const [title, setTitle] = useState('');
-    const [text, setText] = useState('');
-    const [isPending, setIsPending] = useState(false);
+    // const [title, setTitle] = useState('');
+    // const [text, setText] = useState('');
+    // const [isPending, setIsPending] = useState(false);
 
     //make a fetch request from the server
-    const url = 'http://127.0.0.1:5000/api/notes';
+   
 
     // Fetch the last id from the server
-    useEffect(() => {
-        fetchLastId();
-    }, []);
+    // useEffect(() => {
+    //     fetchLastId();
+    // }, []);
   
-    const fetchLastId = () => {
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                const maxId = Math.max(...data.notes.map(note => note.id));
-                setLastId(maxId);
-            })
-            .catch(error => {
-                console.error('Error fetching last id:', error);
-            });
-    };
-    //---------------------------//
+    // const fetchLastId = () => {
+    //     fetch(url)
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             const maxId = Math.max(...data.notes.map(note => note.id));
+    //             setLastId(maxId);
+                
+    //         })
+    //         .catch(error => {
+    //             console.error('Error fetching last id:', error);
+    //         });
+    // };
+
 
     //handle submit
-    const handleSubmit = (e) => {
-        setIsPending(true);
-        e.preventDefault();
-        const newId = lastId + 1; // Increment the last fetched id
-        const note = { id: newId, title, text };
-        fetch('https://my-json-server.typicode.com/ramo-dev/json-db/blogs', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            text: JSON.stringify(note)
-        }).then(() => {
-            setIsPending(false);
-            console.log("Note created successfully. showModal set to true.");
-            // setShowModal(true); // Show the modal after creating the Note
-        }).catch(error => {
-            console.error('Error adding new Note:', error);
-        });
-    };
+    // const handleSubmit = (e) => {
+    //     setIsPending(true);
+    //     e.preventDefault();
+    //     const newId = lastId + 1; // Increment the last fetched id
+    //     const note = { id: newId, title, text };
+    //     fetch('https://my-json-server.typicode.com/ramo-dev/json-db/blogs', {
+    //         method: 'POST',
+    //         headers: { 'Content-Type': 'application/json' },
+    //         text: JSON.stringify(note)
+    //     }).then(() => {
+    //         setIsPending(false);
+    //         console.log("Note created successfully. showModal set to true.");
+    //         // setShowModal(true); // Show the modal after creating the Note
+    //     }).catch(error => {
+    //         console.error('Error adding new Note:', error);
+    //     });
+    // };
     
+
 
     function addToNoteSection(event) {
         event.preventDefault();
-  
         const title = document.querySelector('.title').value;
         const note = document.querySelector('.note').value;
         const notesbar = document.querySelector('.notesbar');
+       
   
         if (!title || !note) {
           alert("Please enter both title and note!");
           return;
         }
   
+        
         // Create the new card with the delete button
         const newCard = `
           <div class="note-preview">
@@ -95,7 +98,7 @@ const CreateData = () => {
           notePreview.remove();
         }
       }
-      
+      useFetch('http://127.0.0.1:5000/api/notes')
       return (
         <div className="container">
           <div className="notesbar">

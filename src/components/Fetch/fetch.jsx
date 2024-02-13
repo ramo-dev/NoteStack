@@ -1,50 +1,29 @@
 import { useEffect, useState } from "react";
 
 const useFetch = (url) => {
-  const [data, setData] = useState(null);
-  const [isPending, setIsPending] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const abortCont = new AbortController();
-
-    setTimeout(() => {
-      fetch(url, { signal: abortCont.signal })
-        .then((response) => {
-          if (!response.ok) {
-            throw Error("Could not Fetch data from the server !");
-          }
-          return response.json();
-        })
-        .then((responseData) => {
-          const NotesArray = Array.isArray(responseData) ? responseData : responseData.blogs;
-
-          if (Array.isArray(NotesArray)) {
-            setData(NotesArray);
-            setIsPending(false);
-            setError(null);
-          } else {
-            throw Error("Invalid data structure: Missing or invalid 'notes' key.");
-          }
-        })
-        .catch((err) => {
-            if(err.name === 'AbortError'){
-                console.log('fetch aborted')
-            }
-            else{
-            }
-            setIsPending(false);
-            setError(err.message);
-
-        });
-
-      return () => {
-        abortCont.abort();
-      };
-    }, 1000);
-  }, [url]);
-
-  return { isPending, error, data };
+  let notes = []
+  async function getData(){
+      await fetch(url)
+      .then(response => response.json())
+      .then(data => {
+          notes = data.notes
+          notes.map((note)=>{ 
+          const notesbar = document.querySelector('.notesbar');
+          let card = `
+          <div class="note-preview">
+          <div>
+              <h1>${note.title}</h1>
+              <p>${note.body}</p>
+          </div>
+          <div>
+              <button class="delete">Delete</button>
+          </div>
+        </div>
+          `
+          notesbar.innerHTML += card
+      
+      })})};
+  getData()
 };
 
 export default useFetch;

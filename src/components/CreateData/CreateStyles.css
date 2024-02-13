@@ -19,14 +19,22 @@ html::-webkit-scrollbar{
     border-radius: 10px;
     margin-right: 1%;
     padding:1%;
-    overflow:hidden ;
+    overflow-y:scroll;
+    height: 65vh;
 }
+.notesbar::-webkit-scrollbar {
+    width: 7px;
+    height: 5px;
+  }
+  .notesbar::-webkit-scrollbar-thumb {
+    background-color:#1A4263;
+    border-radius: 10px;
+  }
 .note-preview{
     border: 2px solid #1A4263;
     width:97%;
     border-radius: inherit;
     height:max-content;
-    /* overflow: hidden; */
     padding:1% 4% 1% 2%;
     margin-top: 10px;
     display: flex;
