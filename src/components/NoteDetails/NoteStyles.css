@@ -105,6 +105,13 @@ form{
     text-align: center;
     padding:5px 20px;
 }
+.view{
+    background-color:grey; ;
+    color:#fff;
+    font-size: 10px;
+    text-align: center;
+    padding:5px 20px;
+}
 .del{
     background-color:#c52a2a; ;
     color:#fff;
