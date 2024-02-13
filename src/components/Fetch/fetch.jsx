@@ -6,7 +6,7 @@ const useFetch = (url) => {
       await fetch(url)
       .then(response => response.json())
       .then(data => {
-          notes = data.notes
+          notes = data.reverse()
           notes.map((note)=>{ 
           const notesbar = document.querySelector('.notesbar');
           let card = `
