@@ -1,46 +1,61 @@
+
+
 import './NoteStyles.css';
-import useFetch from '../Fetch/fetch';
 import React, { useState, useEffect } from 'react';
 
+const NoteDetails = () => {
+  const [notes, setNotes] = useState([]);
+  const [selectedNote, setSelectedNote] = useState(null);
+  const [editMode, setEditMode] = useState(false);
 
-  const NoteDetails = () => {
-    const [notes, setNotes] = useState([]);
-    const [selectedNote, setSelectedNote] = useState(null);
-    const [editMode, setEditMode] = useState(false);
-  
-    useEffect(() => {
-      const storedNotes = JSON.parse(localStorage.getItem('notes'));
-      if (storedNotes) {
-        setNotes(storedNotes);
+  useEffect(() => {
+    fetchNotesFromServer(); // Fetch notes when component mounts
+  }, []);
+
+  useEffect(() => {
+    document.cookie = `notes=${JSON.stringify(notes)}`; // Store notes in cookies
+  }, [notes]);
+
+  const fetchNotesFromServer = async () => {
+    try {
+      const response = await fetch('http://127.0.0.1:5001/api/notes');
+      if (response.ok) {
+        const data = await response.json();
+        setNotes(data.notes.reverse());
+      } else {
+        console.error('Failed to fetch notes:', response.statusText);
+        
       }
-    }, []);
-  
-    useEffect(() => {
-      localStorage.setItem('notes', JSON.stringify(notes));
-    }, [notes]);
-  
-    const handleViewClick = (note) => {
-      setSelectedNote(note);
-      setEditMode(true); // Set edit mode when a note is selected
-    };
-  
-    const handleDeleteClick = async () => {
-      try {
-        const response = await fetch(`http://127.0.0.1:3000/notes/${selectedNote.id}`, {
-          method: 'DELETE',
-        });
-  
-        if (response.ok) {
-          setNotes(notes.filter((note) => note.id !== selectedNote.id));
-          setSelectedNote(null);
-          setEditMode(false);
-        } else {
-          alert('Failed to delete note');
-        }
-      } catch (error) {
-        console.error('Error deleting note:', error);
+    } catch (error) {
+      console.error('Error fetching notes:', error);
+    }
+  };
+
+  const handleViewClick = (note) => {
+    setSelectedNote(note);
+    setEditMode(true); // Set edit mode when a note is selected
+  };
+
+  const handleDeleteClick = async () => {
+    try {
+      const response = await fetch(`http://127.0.0.1:5001/api/notes/${selectedNote.id}`, {
+        method: 'DELETE'
+      });
+
+      if (response.ok) {
+        setNotes(notes.filter((note) => note.id !== selectedNote.id));
+        setSelectedNote(null);
+        setEditMode(false);
+        document.querySelector('input').innerText = ''
+        document.querySelector('textarea').innerText = ''
+        alert('Note added successfully')
+      } else {
+        alert('Failed to delete note');
       }
-    };
+    } catch (error) {
+      console.error('Error deleting note:', error);
+    }
+  };
 
   
     return (
@@ -83,5 +98,4 @@ import React, { useState, useEffect } from 'react';
       </div>
     );
   };
-  
   export default NoteDetails;

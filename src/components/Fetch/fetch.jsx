@@ -1,12 +1,24 @@
 import { useEffect, useState } from "react";
-
+import {handleDeleteButtonClick }from "../CreateData/CreateData";
 const useFetch = (url) => {
   let notes = []
   async function getData(){
-      await fetch(url)
-      .then(response => response.json())
+    const response = await fetch(url,{
+        method: 'GET'
+      })
+      // const data = response.json()
+      .then(response => {
+        if(response.status == 200){
+          return response.json()
+        }
+        else{
+          document.querySelector('.error').textContent = 'Error fetching notes!'
+          document.querySelector('.error').style.color = 'red'
+      }
+      })
       .then(data => {
-          notes = data.reverse()
+          const newData = data
+          notes = newData.reverse()
           notes.map((note)=>{ 
           const notesbar = document.querySelector('.notesbar');
           let card = `
@@ -19,11 +31,15 @@ const useFetch = (url) => {
               <button class="delete">Delete</button>
           </div>
         </div>
+        <script>
+        const deletebtn = document.querySelector('.delete')
+        deletebtn.addEventListner('click', ${handleDeleteButtonClick})
+        </script>
           `
           notesbar.innerHTML += card
       
-      })})};
+      })
+    })};
   getData()
 };
-
 export default useFetch;

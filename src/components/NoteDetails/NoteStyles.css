@@ -111,6 +111,7 @@ form{
     font-size: 10px;
     text-align: center;
     padding:5px 20px;
+    width:70px;
 }
 .del{
     background-color:#c52a2a; ;
