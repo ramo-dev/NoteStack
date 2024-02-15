@@ -2,6 +2,8 @@
 
 NoteStack is more than just a note-taking app; it's your knowledge hub. Tired of information scattered across emails, documents, and your brain? NoteStack gathers it all in one beautiful, searchable space.
 
+<img src="https://github.com/ramo-dev/ramo-dev/blob/main/Notestack.png?raw=true">
+
 ## Features
 
 - Centralized information storage
